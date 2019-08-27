@@ -9,14 +9,15 @@ namespace ConfigRight.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class CustomerController : ControllerBase
     {
-
-        public ValuesController(IOptions<GlobalConfigurationSettings> globalConfig)
+        Customerconfig _customerconfigsetting;
+        public CustomerController(IOptions<Customerconfig> customerConfig)
         {
-            globalConfig.Value.
+            _customerconfigsetting = customerConfig.Value;
         }
-        // GET api/values
+
+        // GET api/valuessss
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {

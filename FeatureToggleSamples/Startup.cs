@@ -10,9 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ConfigRight.Controllers;
 
-namespace ConfigRight
+namespace FeatureToggleSamples
 {
     public class Startup
     {
@@ -27,20 +26,14 @@ namespace ConfigRight
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            //services.Configure<GlobalConfiguraiton>(Configuration);
             services.AddOptions();
-            services.Configure<Customerconfig>(Configuration.GetSection("Customerconfig"));
-            services.Configure<Producerconfig>(Configuration.GetSection("Producerconfig"));
-
+            services.Configure<CustomerFeature2019toggle>(Configuration.GetSection("CustomerFeature2019Toggle"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //services.AddSingleton<IConfiguration>(Configuration);
-            //services.Configure<Customerconfig>(Configuration.GetSection("Customerconfig"));
-            //services.Configure<Producerconfig>(Configuration.GetSection("Producerconfig"));
-            // services.Configure<GlobalConfigurationSettings>(Configuration);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

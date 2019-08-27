@@ -9,14 +9,14 @@ namespace ConfigRight.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ProducerController : ControllerBase
     {
-
-        public ValuesController(IOptions<GlobalConfigurationSettings> globalConfig)
+        Producerconfig _producerConfigSetting;
+        public ProducerController(IOptions<Producerconfig> producerConfig)
         {
-            globalConfig.Value.
+            _producerConfigSetting = producerConfig.Value;
         }
-        // GET api/values
+        // GET api/valuessss
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {

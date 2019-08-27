@@ -5,22 +5,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace ConfigRight.Controllers
+namespace FeatureToggleSamples.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
 
-        public ValuesController(IOptions<GlobalConfigurationSettings> globalConfig)
+        CustomerFeature2019toggle _customerconfigsetting;
+        public ValuesController(IOptions<CustomerFeature2019toggle> customerConfig)
         {
-            globalConfig.Value.
+            _customerconfigsetting = customerConfig.Value;
         }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            if (_customerconfigsetting.CustomerUI)
+            {
+                return new string[] { "value1", "value2" };
+            } else return null;
         }
 
         // GET api/values/5
@@ -48,8 +52,4 @@ namespace ConfigRight.Controllers
         {
         }
     }
-
-
 }
-
-
